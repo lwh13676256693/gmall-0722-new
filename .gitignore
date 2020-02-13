@@ -1,5 +1,7 @@
 .idea/
 targer/
+mvnw*
+.mvn/
 
 # Compiled class file
 *.class
