@@ -11,7 +11,7 @@ spring:
     username: root
     password: 123456
   redis:
-    host: 172.16.116.100
+    host: 192.168.200.128
 mybatis-plus:
   global-config:
     db-config:

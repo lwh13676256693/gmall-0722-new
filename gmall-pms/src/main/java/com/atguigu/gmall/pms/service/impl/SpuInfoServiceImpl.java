@@ -102,8 +102,8 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         //2.保存sku相关的3张表
         saveSkuAndSale(spuInfoVo, spuInfoVoId);
 
-//        int i = 1/0;
-        sendMess("insert",spuInfoVoId);
+        int i = 1/0;
+//        sendMess("insert",spuInfoVoId);
     }
 
     private void sendMess(String type,Long spuId){

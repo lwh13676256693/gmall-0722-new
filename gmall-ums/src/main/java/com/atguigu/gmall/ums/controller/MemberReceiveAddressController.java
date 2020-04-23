@@ -1,12 +1,14 @@
 package com.atguigu.gmall.ums.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.atguigu.gmall.ums.entity.MemberReceiveAddressEntity;
 import com.atguigu.gmall.ums.service.MemberReceiveAddressService;
-
-
 
 
 /**
@@ -32,6 +32,12 @@ import com.atguigu.gmall.ums.service.MemberReceiveAddressService;
 public class MemberReceiveAddressController {
     @Autowired
     private MemberReceiveAddressService memberReceiveAddressService;
+
+    @GetMapping("{userId}")
+    public Resp<List<MemberReceiveAddressEntity>> queryAddressByUserId(@PathVariable("userId") Long userId) {
+        List<MemberReceiveAddressEntity> list = this.memberReceiveAddressService.list(new QueryWrapper<MemberReceiveAddressEntity>().lambda().eq(MemberReceiveAddressEntity::getMemberId, userId));
+        return Resp.ok(list);
+    }
 
     /**
      * 列表
@@ -52,8 +58,8 @@ public class MemberReceiveAddressController {
     @ApiOperation("详情查询")
     @GetMapping("/info/{id}")
     @PreAuthorize("hasAuthority('ums:memberreceiveaddress:info')")
-    public Resp<MemberReceiveAddressEntity> info(@PathVariable("id") Long id){
-		MemberReceiveAddressEntity memberReceiveAddress = memberReceiveAddressService.getById(id);
+    public Resp<MemberReceiveAddressEntity> info(@PathVariable("id") Long id) {
+        MemberReceiveAddressEntity memberReceiveAddress = memberReceiveAddressService.getById(id);
 
         return Resp.ok(memberReceiveAddress);
     }
@@ -64,8 +70,8 @@ public class MemberReceiveAddressController {
     @ApiOperation("保存")
     @PostMapping("/save")
     @PreAuthorize("hasAuthority('ums:memberreceiveaddress:save')")
-    public Resp<Object> save(@RequestBody MemberReceiveAddressEntity memberReceiveAddress){
-		memberReceiveAddressService.save(memberReceiveAddress);
+    public Resp<Object> save(@RequestBody MemberReceiveAddressEntity memberReceiveAddress) {
+        memberReceiveAddressService.save(memberReceiveAddress);
 
         return Resp.ok(null);
     }
@@ -76,8 +82,8 @@ public class MemberReceiveAddressController {
     @ApiOperation("修改")
     @PostMapping("/update")
     @PreAuthorize("hasAuthority('ums:memberreceiveaddress:update')")
-    public Resp<Object> update(@RequestBody MemberReceiveAddressEntity memberReceiveAddress){
-		memberReceiveAddressService.updateById(memberReceiveAddress);
+    public Resp<Object> update(@RequestBody MemberReceiveAddressEntity memberReceiveAddress) {
+        memberReceiveAddressService.updateById(memberReceiveAddress);
 
         return Resp.ok(null);
     }
@@ -88,8 +94,8 @@ public class MemberReceiveAddressController {
     @ApiOperation("删除")
     @PostMapping("/delete")
     @PreAuthorize("hasAuthority('ums:memberreceiveaddress:delete')")
-    public Resp<Object> delete(@RequestBody Long[] ids){
-		memberReceiveAddressService.removeByIds(Arrays.asList(ids));
+    public Resp<Object> delete(@RequestBody Long[] ids) {
+        memberReceiveAddressService.removeByIds(Arrays.asList(ids));
 
         return Resp.ok(null);
     }

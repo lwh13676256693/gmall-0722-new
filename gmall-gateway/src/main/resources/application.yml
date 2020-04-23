@@ -32,6 +32,19 @@ spring:
             - Path=/api/index/**
           filters:
             - RewritePath=/api(?<segment>/?.*), $\{segment}
+        - id: order-route
+          uri: lb://order-service
+          predicates:
+            - Path=/api/order/**
+          filters:
+            - RewritePath=/api(?<segment>/?.*), $\{segment}
+            # 启动这个就需要登录，不启用就不用登录
+#            - Auth
+
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+gmall:
+  jwt:
+    pubKeyPath: C:\\project-0722\\rsa\\rsa.pub # 公钥地址
+    cookieName: GMALL_TOKEN

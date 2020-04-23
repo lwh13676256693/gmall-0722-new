@@ -15,8 +15,8 @@ class GmallIndexApplicationTests {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
     @Test
-    void contextLoads() {
-        this.stringRedisTemplate.opsForValue().set("name","haoge");
+    void contextLoads1() {
+        this.redisTemplate.opsForValue().set("name22","haoge1");
     }
 
 }
